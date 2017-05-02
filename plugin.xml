@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='utf-8'?>
+<plugin id="cordova-plugin-install-referrer-catcher" version="0.0.1" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+	<name>InstallReferrerCatcher</name>
+	<js-module name="InstallReferrerCatcher" src="www/InstallReferrerCatcher.js">
+		<clobbers target="cordova.plugins.InstallReferrerCatcher" />
+	</js-module>
+	<platform name="android">
+		<config-file parent="/*" target="res/xml/config.xml">
+			<feature name="InstallReferrerCatcher">
+				<param name="android-package" value="com.plugin.InstallReferrerCatcher.InstallReferrerCatcher" />
+			</feature>
+		</config-file>
+		<config-file target="AndroidManifest.xml" parent="application">
+            <receiver android:name="com.plugin.InstallReferrerCatcher.InstallReferrerReceiver" android:exported="true">
+				<intent-filter>
+					<action android:name="com.android.vending.INSTALL_REFERRER" />
+				</intent-filter>
+			</receiver>
+        </config-file>
+		<source-file src="src/android/InstallReferrerCatcher.java" target-dir="src/com/plugin/InstallReferrerCatcher" />
+		<source-file src="src/android/InstallReferrerReceiver.java" target-dir="src/com/plugin/InstallReferrerCatcher" />
+	</platform>
+</plugin>
